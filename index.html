@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Espaço</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;600&display=swap');
+
+        /* Tema escuro com detalhes dourados */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: #ffffff; /* Texto branco */
+            overflow-x: hidden; /* Evita rolagem horizontal */
+        }
+
+        /* Caixa com efeito moderno e dourado */
+        .container {
+            background: rgba(0, 0, 0, 0.5); /* Preto com transparência */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); /* Sombra dourada brilhante */
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #ffd700; /* Borda dourada */
+            backdrop-filter: blur(12px);
+            margin: 20px auto; /* Centraliza o container */
+        }
+
+        .cliente-img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 3px solid #ffd700; /* Borda dourada */
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700; /* Texto dourado */
+            font-size: 24px;
+            margin-top: 10px;
+            text-shadow: 1px 1px 5px rgba(255, 215, 0, 0.8); /* Sombra dourada brilhante */
+        }
+
+        .botoes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .botao {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            color: white;
+            transition: 0.3s;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .botao img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .instagram { background: linear-gradient(90deg, #e1306c, #fd1d1d, #c13584); }
+        .whatsapp { background: #25d366; }
+        .pix { background: #009688; }
+        .localizacao { background: #ff9800; }
+        .contato { background: #673AB7; }
+        .facebook { background: #1877f2; }
+        .tiktok { background: #000000; }
+        .wifi { background: #4CAF50; }
+
+        .botao:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* Estilos para a galeria */
+        .galeria {
+            text-align: center;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); /* Sombra dourada brilhante */
+            width: 90%;
+            max-width: 800px;
+            border: 2px solid #ffd700; /* Borda dourada */
+            backdrop-filter: blur(12px);
+        }
+
+        .galeria h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #ffd700; /* Texto dourado */
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 5px rgba(255, 215, 0, 0.8); /* Sombra dourada brilhante */
+        }
+
+        .fotos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .fotos img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid #ffd700; /* Borda dourada */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .fotos img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5); /* Sombra dourada brilhante */
+        }
+
+        /* Modal do Pix e WhatsApp */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8); /* Fundo escuro */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.9); /* Fundo preto com transparência */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); /* Sombra dourada brilhante */
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #ffd700; /* Borda dourada */
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700; /* Texto dourado */
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #009688; /* Cor do Pix */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-content button:hover {
+            background: #00796b; /* Cor do Pix (hover) */
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .modal-content img {
+            width: 100%;
+            max-width: 200px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid #ffd700; /* Borda dourada */
+        }
+
+        /* Carrossel abaixo dos botões */
+        .carrossel {
+            width: 100%;
+            height: 200px; /* Altura reduzida para celular */
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .carrossel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carrossel img.ativa {
+            opacity: 1;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .carrossel {
+                height: 150px; /* Altura ainda menor para celulares pequenos */
+            }
+
+            .galeria h2 {
+                font-size: 18px; /* Reduzir o tamanho do título da galeria */
+            }
+
+            .fotos img {
+                width: 100px; /* Reduzir o tamanho das imagens da galeria */
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="img/logo.jpeg" alt="Foto da Cliente" class="cliente-img">
+       
+        <h1>Estudio Nosso Espaço</h1>
+        
+        <div class="botoes">
+            <a href="https://www.instagram.com/studio_nosso_espaco?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="botao instagram">
+                <img src="img/instagram.png" alt="Instagram"> Instagram
+            </a>
+            <a href="#" class="botao whatsapp" id="abrirModalWhatsApp">
+                <img src="img/whatsap.jpg" alt="WhatsApp"> WhatsApp
+            </a>
+            <a href="#" class="botao pix" id="abrirModalPix">
+                <img src="/img/pix.png" alt="Pix"> Pix
+            </a>
+            <a href="https://www.google.com.br/maps/dir//-22.9133804,-45.3638776/@-22.9133366,-45.3638454,21z?entry=ttu&g_ep=EgoyMDI1MDEyNi4wIKXMDSoASAFQAw%3D%3D" class="botao localizacao">
+                <img src="img/localizao.png" alt="Localização"> Localização
+            </a>
+        </div>
+    </div>
+
+    <!-- Carrossel de imagens abaixo dos botões -->
+    <div class="carrossel">
+        <img src="img/giaraujo.PNG" alt="Fundo 1" class="ativa">
+        <img src="img/anacarla.PNG" alt="Fundo 2">
+        <img src="img/caamily.PNG" alt="Fundo 3">
+    </div>
+
+    <!-- GALERIA DE FOTOS -->
+    <div class="galeria">
+        <h2> </h2>
+        <div class="fotos">
+            <img src="img/foto 1.PNG" alt="Unha Decorada 1">
+            <img src="img/foto2.PNG" alt="Unha Decorada 2">
+            <img src="img/foto3.PNG" alt="Unha Decorada 3">
+            <img src="img/foto4.PNG" alt="Unha Decorada 4">
+            <img src="img/foto5.PNG" alt="Unha Decorada 5">
+        </div>
+    </div>
+
+    <!-- Modal do Pix -->
+    <div class="modal" id="modalPix">
+        <div class="modal-content">
+            <h2>Escolha uma pessoa</h2>
+            <button onclick="mostrarChave('Ana Carla', '12996001078')">Ana Carla</button>
+            <button onclick="mostrarChave('Camily', '12996739961')">Camily</button>
+            <button onclick="mostrarChave('Gi Araújo', '12996442848')">Gi Araújo</button>
+            <p id="chavePix" style="display: none; font-size: 18px; margin-top: 20px;"></p>
+            <button onclick="copiarChave()" id="botaoCopiar" style="display: none;">Copiar Chave</button>
+            <button onclick="fecharModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal do WhatsApp -->
+    <div class="modal" id="modalWhatsApp">
+        <div class="modal-content">
+            <h2>Escolha uma pessoa</h2>
+            <button onclick="abrirWhatsApp('12996001078')">Ana Carla</button>
+            <button onclick="abrirWhatsApp('12996739961')">Camily</button>
+            <button onclick="abrirWhatsApp('12996442848')">Gi Araújo</button>
+            <button onclick="fecharModalWhatsApp()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        // Abrir modal do Pix
+        document.getElementById("abrirModalPix").addEventListener("click", function() {
+            document.getElementById("modalPix").style.display = "flex";
+        });
+
+        // Abrir modal do WhatsApp
+        document.getElementById("abrirModalWhatsApp").addEventListener("click", function() {
+            document.getElementById("modalWhatsApp").style.display = "flex";
+        });
+
+        // Fechar modal do Pix
+        function fecharModal() {
+            document.getElementById("modalPix").style.display = "none";
+            document.getElementById("chavePix").style.display = "none";
+            document.getElementById("botaoCopiar").style.display = "none";
+        }
+
+        // Fechar modal do WhatsApp
+        function fecharModalWhatsApp() {
+            document.getElementById("modalWhatsApp").style.display = "none";
+        }
+
+        // Mostrar chave Pix
+        function mostrarChave(nome, chave) {
+            document.getElementById("chavePix").innerText = `Chave Pix de ${nome}: ${chave}`;
+            document.getElementById("chavePix").style.display = "block";
+            document.getElementById("botaoCopiar").style.display = "block";
+        }
+
+        // Copiar chave Pix
+        function copiarChave() {
+            const chave = document.getElementById("chavePix").innerText;
+            navigator.clipboard.writeText(chave).then(function() {
+                alert("Chave Pix copiada!");
+            });
+        }
+
+        // Abrir WhatsApp
+        function abrirWhatsApp(numero) {
+            const url = `https://wa.me/55${numero}`; // Formato do link do WhatsApp
+            window.open(url, '_blank'); // Abre em uma nova aba
+        }
+
+        // Script para o carrossel
+        let imagens = document.querySelectorAll('.carrossel img');
+        let index = 0;
+
+        function trocarImagem() {
+            imagens[index].classList.remove('ativa');
+            index = (index + 1) % imagens.length;
+            imagens[index].classList.add('ativa');
+        }
+
+        setInterval(trocarImagem, 5000); // Troca a imagem a cada 5 segundos
+    </script>
+
+</body>
+</html>
